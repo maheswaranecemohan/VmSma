@@ -1,18 +1,20 @@
 package com.vm.smacompose.presentation.components
-
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.coil.CoilImage
 import com.vm.smacompose.domain.model.People
-
 @Composable
 fun PeopleCard(
     people: People,
@@ -30,44 +32,47 @@ fun PeopleCard(
         elevation = 8.dp,
     ) {
         Column {
-            CoilImage(
-                data = people.avatar,
-                contentDescription = people.jobtitle,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(225.dp),
-                contentScale = ContentScale.Crop,
-            )
-
-            //val painter = rememberImagePainter(data = people.avatar)
-
-            /*Image(
-                painter = painter,
-                contentDescription = "Forest Image",
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )*/
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 12.dp, bottom = 12.dp, start = 8.dp, end = 8.dp)
             ) {
-                Text(
-                    text = people.firstName,
+
+                CoilImage(
+                    data = people.avatar,
                     modifier = Modifier
-                        .fillMaxWidth(0.85f)
-                        .wrapContentWidth(Alignment.Start),
-                    style = MaterialTheme.typography.h3
+                        .size(64.dp)
+                        .clip(CircleShape)                       // clip to the circle shape
+                        .border(2.dp, Color.Gray, CircleShape),
+                    contentScale = ContentScale.Crop,
+                    contentDescription = ""
+
                 )
-                val rank = people.id.toString()
-                Text(
-                    text = rank,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentWidth(Alignment.End)
-                        .align(Alignment.CenterVertically),
-                    style = MaterialTheme.typography.h5
-                )
+                Column(modifier = Modifier.padding(start = 8.dp)) {
+                    Text(
+                        text = people.firstName,
+                        modifier = Modifier
+                            .wrapContentWidth(Alignment.Start),
+                        style = MaterialTheme.typography.h3
+                    )
+                    val title = people.jobtitle
+                    Text(
+                        text = title,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentWidth(Alignment.Start),
+                        style = MaterialTheme.typography.h5
+                    )
+
+                    val email = people.email
+                    Text(
+                        text = email,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentWidth(Alignment.Start),
+                        style = MaterialTheme.typography.h5
+                    )
+                }
             }
         }
     }
