@@ -1,26 +1,31 @@
-package com.vm.smacompose.presentation.components
-import androidx.compose.foundation.border
+package com.vm.smacompose.presentation.components.rooms
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.coil.CoilImage
-import com.vm.smacompose.domain.model.People
+import com.vm.smacompose.domain.model.Room
+
 @Composable
-fun PeopleCard(
-    people: People,
+fun RoomsCard(
+    room: Room,
     onClick: () -> Unit,
 ) {
+
+    val status = if(room.isOccupied){
+        "Occupied"
+    }else{
+        "Not Occupied"
+    }
+
     Card(
+
         shape = MaterialTheme.shapes.small,
         modifier = Modifier
             .padding(
@@ -35,38 +40,28 @@ fun PeopleCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .background(color = colorResource(R.color.androidx_core_ripple_material_light))
                     .padding(top = 12.dp, bottom = 12.dp, start = 8.dp, end = 8.dp)
             ) {
-
-                CoilImage(
-                    data = people.avatar,
-                    modifier = Modifier
-                        .size(64.dp)
-                        .clip(CircleShape)                       // clip to the circle shape
-                        .border(2.dp, Color.Gray, CircleShape),
-                    contentScale = ContentScale.Crop,
-                    contentDescription = ""
-
-                )
                 Column(modifier = Modifier.padding(start = 8.dp)) {
                     Text(
-                        text = people.firstName,
+                        text = "Room ID - "+room.id,
                         modifier = Modifier
                             .wrapContentWidth(Alignment.Start),
                         style = MaterialTheme.typography.h3
                     )
-                    val title = people.jobtitle
+
                     Text(
-                        text = title,
+                        text = "Status - "+status,
                         modifier = Modifier
                             .fillMaxWidth()
                             .wrapContentWidth(Alignment.Start),
                         style = MaterialTheme.typography.h5
                     )
 
-                    val email = people.email
+                    val maxOccupency = room.maxOccupancy.toString()
                     Text(
-                        text = email,
+                        text = "Maximum Occupancy - "+maxOccupency,
                         modifier = Modifier
                             .fillMaxWidth()
                             .wrapContentWidth(Alignment.Start),

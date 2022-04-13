@@ -5,5 +5,7 @@ sealed class Screen(
 ){
     object PeopleList: Screen("peopleList")
 
-    object RoomList: Screen("peopleDetail")
+    object RoomsList: Screen("RoomsList")
+
+    object HomePage: Screen("HomePage")
 }

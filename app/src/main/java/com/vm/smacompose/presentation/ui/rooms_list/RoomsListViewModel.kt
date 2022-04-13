@@ -1,10 +1,10 @@
-package com.vm.smacompose.presentation.ui.people_list
+package com.vm.smacompose.presentation.ui.rooms_list
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vm.smacompose.domain.model.People
+import com.vm.smacompose.domain.model.Room
 import com.vm.smacompose.interactors.GetUserDetails
 import com.vm.smacompose.presentation.ui.util.DialogQueue
 import com.vm.smacompose.utils.TAG
@@ -15,24 +15,24 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PeopleListViewModel
+class RoomsListViewModel
 @Inject
 constructor(
     private val getUserDetails: GetUserDetails
 ) : ViewModel() {
-    val people: MutableState<List<People>> = mutableStateOf(ArrayList())
+    val rooms: MutableState<List<Room>> = mutableStateOf(ArrayList())
     val loading = mutableStateOf(false)
     val dialogQueue = DialogQueue()
 
     init {
-        onTriggerEvent(PeopleListEvent.GetPeopleEvent)
+        onTriggerEvent(RoomsListEvent.GetRoomsEvent)
     }
 
-    fun onTriggerEvent(event: PeopleListEvent) {
+    fun onTriggerEvent(event: RoomsListEvent) {
         viewModelScope.launch {
             try {
                 when (event) {
-                    is PeopleListEvent.GetPeopleEvent -> {
+                    is RoomsListEvent.GetRoomsEvent -> {
                         newSearch()
                     }
                 }
@@ -48,13 +48,12 @@ constructor(
         Log.d(TAG, "newSearch: query")
         // New search. Reset the state
         resetSearchState()
-
-        getUserDetails.fetchPeopleDetails()
+        getUserDetails.fetchRoomDetails()
             .onEach { dataState ->
                 loading.value = dataState.loading
 
                 dataState.data?.let { list ->
-                    people.value = list
+                    rooms.value = list
                 }
 
                 dataState.error?.let { error ->
@@ -67,7 +66,7 @@ constructor(
      * Called when a new search is executed.
      */
     private fun resetSearchState() {
-        people.value = listOf()
+        rooms.value = listOf()
     }
 }
 

@@ -1,20 +1,20 @@
-package com.vm.smacompose.presentation.ui.people_list
+package com.vm.smacompose.presentation.ui.rooms_list
 import android.util.Log
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import com.vm.smacompose.presentation.components.PeopleList
+import com.vm.smacompose.presentation.components.rooms.RoomsList
 import com.vm.smacompose.presentation.theme.AppTheme
 import com.vm.smacompose.utils.TAG
 
 @Composable
-fun PeopleListScreen(
+fun RoomsListScreen(
   isDarkTheme: Boolean,
   isNetworkAvailable: Boolean,
-  viewModel: PeopleListViewModel,
+  viewModel: RoomsListViewModel,
 ) {
   Log.d(TAG, "PeopleListScreen: ${viewModel}")
-  val people = viewModel.people.value
+  val rooms = viewModel.rooms.value
   val loading = viewModel.loading.value
   val dialogQueue = viewModel.dialogQueue
   val scaffoldState = rememberScaffoldState()
@@ -32,9 +32,9 @@ fun PeopleListScreen(
         scaffoldState.snackbarHostState
       },
     ) {
-      PeopleList(
+      RoomsList(
         loading = loading,
-        people = people
+        rooms = rooms
       )
     }
   }

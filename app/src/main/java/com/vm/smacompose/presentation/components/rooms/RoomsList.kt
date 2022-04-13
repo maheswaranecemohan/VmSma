@@ -1,4 +1,4 @@
-package com.vm.smacompose.presentation.components
+package com.vm.smacompose.presentation.components.rooms
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.lazy.LazyColumn
@@ -8,27 +8,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.vm.smacompose.domain.model.People
+import com.vm.smacompose.domain.model.Room
+import com.vm.smacompose.presentation.components.LoadingPeopleListShimmer
+import com.vm.smacompose.presentation.components.NothingHere
+import com.vm.smacompose.presentation.navigation.Screen
+
 @Composable
-fun PeopleList(
+fun RoomsList(
     loading: Boolean,
-    people: List<People>
+    rooms: List<Room>
 ){
     Box(modifier = Modifier
         .background(color = MaterialTheme.colors.surface)
     ) {
-        if (loading && people.isEmpty()) {
+        if (loading && rooms.isEmpty()) {
             LoadingPeopleListShimmer(imageHeight = 250.dp,)
         }
-        else if(people.isEmpty()){
+        else if(rooms.isEmpty()){
             NothingHere()
         }
         else {
             LazyColumn{
                 itemsIndexed(
-                    items = people
-                ) { index, people ->
-                    PeopleCard(
-                        people = people,
+                    items = rooms
+                ) { index, rooms ->
+                    RoomsCard(
+                        room = rooms,
                         onClick = {
                         }
                     )
