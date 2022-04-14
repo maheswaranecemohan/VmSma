@@ -6,6 +6,7 @@ import com.vm.smacompose.network.PeopleService
 import com.vm.smacompose.network.RoomService
 import com.vm.smacompose.network.model.people.PeopleDtoMapper
 import com.vm.smacompose.network.model.room.RoomDtoMapper
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -19,6 +20,7 @@ class GetUserDetails(
     fun fetchPeopleDetails(): Flow<DataState<List<People>>> = flow {
         try {
             emit(DataState.loading())
+            delay(1000)
             var people = getPeoplefromNetwork()
             if (people != null) {
                 emit(DataState.success(people))
@@ -34,6 +36,7 @@ class GetUserDetails(
     fun fetchRoomDetails(): Flow<DataState<List<Room>>> = flow {
         try {
             emit(DataState.loading())
+            delay(1000)
             var rooms = getRoomsfromNetwork()
             if (rooms != null) {
                 emit(DataState.success(rooms))

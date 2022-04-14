@@ -22,7 +22,7 @@ fun RoomsList(
         .background(color = MaterialTheme.colors.surface)
     ) {
         if (loading && rooms.isEmpty()) {
-            LoadingPeopleListShimmer(imageHeight = 250.dp,)
+            LoadingPeopleListShimmer(imageHeight = 100.dp,)
         }
         else if(rooms.isEmpty()){
             NothingHere()

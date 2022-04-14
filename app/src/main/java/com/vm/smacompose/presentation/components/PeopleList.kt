@@ -17,7 +17,7 @@ fun PeopleList(
         .background(color = MaterialTheme.colors.surface)
     ) {
         if (loading && people.isEmpty()) {
-            LoadingPeopleListShimmer(imageHeight = 250.dp,)
+            LoadingPeopleListShimmer(imageHeight = 100.dp,)
         }
         else if(people.isEmpty()){
             NothingHere()
