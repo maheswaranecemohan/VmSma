@@ -2,8 +2,7 @@ package com.vm.smacompose.interactors
 import com.vm.smacompose.domain.data.DataState
 import com.vm.smacompose.domain.model.People
 import com.vm.smacompose.domain.model.Room
-import com.vm.smacompose.network.PeopleService
-import com.vm.smacompose.network.RoomService
+import com.vm.smacompose.network.UserService
 import com.vm.smacompose.network.model.people.PeopleDtoMapper
 import com.vm.smacompose.network.model.room.RoomDtoMapper
 import kotlinx.coroutines.delay
@@ -11,8 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class GetUserDetails(
-    private val roomService: RoomService,
-    private val peopleService: PeopleService,
+    private val userService: UserService,
     private val roomDtoMapper: RoomDtoMapper,
     private val peopleDtoMapper: PeopleDtoMapper
 ) {
@@ -30,7 +28,7 @@ class GetUserDetails(
         }
     }
     suspend fun getPeoplefromNetwork(): List<People> {
-        return peopleDtoMapper.toDomainList(peopleService.get())
+        return peopleDtoMapper.toDomainList(userService.getPeople())
     }
 
     fun fetchRoomDetails(): Flow<DataState<List<Room>>> = flow {
@@ -47,7 +45,7 @@ class GetUserDetails(
     }
 
     suspend fun getRoomsfromNetwork(): List<Room> {
-        return roomDtoMapper.toDomainList(roomService.get())
+        return roomDtoMapper.toDomainList(userService.getRooms())
     }
 
 }

@@ -1,7 +1,6 @@
 package com.vm.smacompose.di
 import com.google.gson.GsonBuilder
-import com.vm.smacompose.network.PeopleService
-import com.vm.smacompose.network.RoomService
+import com.vm.smacompose.network.UserService
 import com.vm.smacompose.network.model.people.PeopleDtoMapper
 import com.vm.smacompose.network.model.room.RoomDtoMapper
 import dagger.Module
@@ -24,16 +23,11 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build()
     }
-    @Singleton
-    @Provides
-    fun providePeopleService(retrofit: Retrofit): PeopleService {
-        return retrofit.create(PeopleService::class.java)
-    }
 
     @Singleton
     @Provides
-    fun provideRoomService(retrofit: Retrofit): RoomService {
-        return retrofit.create(RoomService::class.java)
+    fun provideUserService(retrofit: Retrofit): UserService {
+        return retrofit.create(UserService::class.java)
     }
 
     @Singleton

@@ -1,7 +1,6 @@
 package com.vm.smacompose.di
 import com.vm.smacompose.interactors.GetUserDetails
-import com.vm.smacompose.network.PeopleService
-import com.vm.smacompose.network.RoomService
+import com.vm.smacompose.network.UserService
 import com.vm.smacompose.network.model.people.PeopleDtoMapper
 import com.vm.smacompose.network.model.room.RoomDtoMapper
 import dagger.Module
@@ -15,14 +14,12 @@ object InteractorsModule {
   @ViewModelScoped
   @Provides
   fun provideGetUserDetails(
-    roomService: RoomService,
-    peopleService: PeopleService,
+    userService: UserService,
     roomDtoMapper: RoomDtoMapper,
     peopleDtoMapper: PeopleDtoMapper,
   ): GetUserDetails {
     return GetUserDetails(
-      roomService = roomService,
-      peopleService = peopleService,
+      userService = userService,
       roomDtoMapper = roomDtoMapper,
       peopleDtoMapper = peopleDtoMapper,
     )
