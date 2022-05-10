@@ -1,0 +1,50 @@
+buildscript {
+    ext {
+        //compose_version = '1.1.1'
+        //----
+        versionName = '1.0'
+        jvmTarget = '1.8'
+
+        kotlin = '1.4.30'
+        gradle = '7.0.0-alpha08'
+        hilt = '2.37'
+        junit5 = '1.7.0.0'
+        kotlin_compiler_extension = '1.0.0-beta01'
+
+        core_ktx = '1.3.2'
+        app_compat = '1.3.0-beta01'
+        material = '1.2.1'
+        constraint_layout = '2.0.4'
+        androidx_ui = '1.0.0-alpha07'
+        compose = '1.0.0-beta01'
+        compose_constraint = '1.0.0-alpha03'
+        compose_activity = '1.3.0-alpha03'
+        hilt_lifecycle_viewmodel = '1.0.0-alpha03'
+        nav_component = '2.3.2'
+        nav_compose = '1.0.0-alpha08'
+        hilt_navigation = '1.0.0-alpha03'
+        retrofit = '2.9.0'
+        okHttp = '4.9.0'
+        leak_canary = '2.5'
+        room =  '2.2.6'
+        junit_jupiter = '5.7.0'
+        datastore = '1.0.0-alpha06'
+        accompanist_coil = '0.7.0'
+    }
+
+    /*dependencies {
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.37"
+    }*/
+
+}// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '7.1.3' apply false
+    id 'com.android.library' version '7.1.3' apply false
+    id 'org.jetbrains.kotlin.android' version '1.4.30' apply false
+    //id 'androidx.navigation.safeargs.kotlin' version '2.4.1' apply false
+    // id 'com.google.dagger.hilt.android' version '2.37' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
