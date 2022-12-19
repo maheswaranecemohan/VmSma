@@ -1,28 +1,15 @@
 package com.vm.smacompose.domain.data
 
-data class DataState<out T>(
-    val data: T? = null,
-    val error: String? = null,
-    val loading: Boolean = false,
-){
-    companion object{
+sealed class DataState<T> {
+    data class Response<T>(
+        val uiComponent: UIComponent
+    ): DataState<T>()
 
-        fun <T> success(
-            data: T
-        ): DataState<T>{
-            return DataState(
-                data = data,
-            )
-        }
+    data class Data<T>(
+        val data: T
+    ): DataState<T>()
 
-        fun <T> error(
-            message: String,
-        ): DataState<T>{
-            return DataState(
-                error = message
-            )
-        }
-
-        fun <T> loading(): DataState<T> = DataState(loading = true)
-    }
+    data class Loading<T>(
+        val progressBarState: ProgressBarState = ProgressBarState.Idle
+    ): DataState<T>()
 }
